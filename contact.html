@@ -488,11 +488,21 @@
 
                   <div >
                        
-                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d962.8229923468441!2d76.90244336947946!3d15.14230189363031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb713119f828801%3A0xfe291967321b9ad8!2sFlezen%20Glow!5e0!3m2!1sen!2sin!4v1750682008071!5m2!1sen!2sin" width="600" height="450" style="border:2px solid black; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                  <iframe id="mappp" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d962.8229923468441!2d76.90244336947946!3d15.14230189363031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb713119f828801%3A0xfe291967321b9ad8!2sFlezen%20Glow!5e0!3m2!1sen!2sin!4v1750682008071!5m2!1sen!2sin" width="600" height="450" style="border:2px solid black; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                    <div class="contact-item" style="margin-top: 30px; max-width: 300px; margin-inline: auto;;" >
                         <div class="contact-icon">📍</div>
                         <div class="contact-details">
                             <style>
+
+                                 @media (max-width: 480px) {
+                                     
+      #mappp{
+          width="350";
+          height="450" ;
+      }
+      }
+
+                                
                                .btnn{ 
                                 background: linear-gradient(135deg, #7e5e3b 0%, #4e6c50 100%);
             color: rgb(255, 255, 255) !important;
