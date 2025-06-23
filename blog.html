@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Flezen Organic Soaps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #fcfaf5;
+            --bg-white: #ffffff;
+            --text-main: #2b2b28;
+            --text-muted: #857b6f;
+            --primary: #7e5e3b;
+            --secondary: #4e6c50;
+            --accent: #e4ccb0;
+            --accent-light: #f0e6d7;
+            --mint: #8fbc8f;
+            --shadow: rgba(126, 94, 59, 0.15);
+            --shadow-soft: rgba(43, 39, 40, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 250, 245, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow-soft);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '🌿';
+            font-size: 1rem;
+            position: absolute;
+            top: -5px;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--bg-light) 100%);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Featured Post */
+        .featured-section {
+            padding: 4rem 0;
+            background: var(--bg-white);
+        }
+
+        .featured-post {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            background: var(--accent-light);
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: 0 15px 35px var(--shadow-soft);
+        }
+
+        .featured-image {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .featured-image img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .featured-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .featured-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .featured-excerpt {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .read-more {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        .read-more:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow);
+        }
+
+        /* Blog Grid */
+        .blog-section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-main);
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .blog-card {
+            background: var(--bg-white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(126, 94, 59, 0.1);
+        }
+
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px var(--shadow);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .blog-tag {
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .blog-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .blog-excerpt {
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--accent);
+        }
+
+        .blog-date {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .blog-read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .blog-read-more:hover {
+            color: var(--secondary);
+        }
+
+        /* Newsletter Section */
+        .newsletter-section {
+            background: var(--accent-light);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .newsletter-content p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .newsletter-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .newsletter-input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--accent);
+            border-radius: 25px;
+            background: var(--bg-white);
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .newsletter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(126, 94, 59, 0.1);
+        }
+
+        .newsletter-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .newsletter-btn:hover {
+            background: var(--secondary);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-main);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 0;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .featured-post {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                padding: 2rem;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .newsletter-form {
+                flex-direction: column;
+            }
+
+            nav {
+                padding: 1rem 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Flezen</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Blog</h1>
+            <p>Discover the world of natural skincare, sustainable living, and the art of handcrafted soap making.</p>
+        </div>
+    </section>
+
+    <!-- Featured Post -->
+    <section class="featured-section">
+        <div class="container">
+            <div class="featured-post fade-in">
+                <div class="featured-image">
+                    <img src="https://images.pexels.com/photos/6663616/pexels-photo-6663616.jpeg?auto=compress&cs=tinysrgb&w=800" alt="The Art of Natural Soap Making">
+                </div>
+                <div class="featured-content">
+                    <h2>The Art of Natural Soap Making</h2>
+                    <div class="featured-meta">
+                        <span class="meta-item">Featured</span>
+                        <span class="meta-item">Craftsmanship</span>
+                        <span class="meta-item">Natural Ingredients</span>
+                    </div>
+                    <p class="featured-excerpt">
+                        Discover the ancient art of soap making and how we've perfected our craft over generations. From selecting the finest organic ingredients to the careful curing process, every step is a labor of love that results in the perfect bar of soap.
+                    </p>
+                    <a href="#" class="read-more">Read Full Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Grid -->
+    <section class="blog-section">
+        <div class="container">
+            <h2 class="section-title fade-in">Latest Articles</h2>
+            <div class="blog-grid">
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/4465831/pexels-photo-4465831.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Benefits of Organic Skincare" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Skincare</span>
+                            <span class="blog-tag">Organic</span>
+                        </div>
+                        <h3>5 Benefits of Switching to Organic Skincare</h3>
+                        <p class="blog-excerpt">
+                            Learn why making the switch to organic skincare products can transform your skin health and contribute to a more sustainable lifestyle.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">March 15, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/7262997/pexels-photo-7262997.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Essential Oils Guide" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Essential Oils</span>
+                            <span class="blog-tag">Aromatherapy</span>
+                        </div>
+                        <h3>Essential Oils: A Complete Beginner's Guide</h3>
+                        <p class="blog-excerpt">
+                            Explore the world of essential oils and discover how these natural extracts can enhance your daily skincare routine and overall well-being.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">March 10, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/6663682/pexels-photo-6663682.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sustainable Beauty" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Sustainability</span>
+                            <span class="blog-tag">Eco-Friendly</span>
+                        </div>
+                        <h3>Building a Sustainable Beauty Routine</h3>
+                        <p class="blog-excerpt">
+                            Simple steps to create an eco-friendly beauty routine that's good for your skin and the planet. Start your sustainable journey today.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">March 5, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/8030795/pexels-photo-8030795.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Skin Types Guide" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Skincare Tips</span>
+                            <span class="blog-tag">Education</span>
+                        </div>
+                        <h3>Understanding Your Skin Type</h3>
+                        <p class="blog-excerpt">
+                            Learn how to identify your skin type and choose the right natural products for your unique skincare needs and concerns.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">February 28, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/6663669/pexels-photo-6663669.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lavender Benefits" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Lavender</span>
+                            <span class="blog-tag">Natural Healing</span>
+                        </div>
+                        <h3>The Healing Power of Lavender</h3>
+                        <p class="blog-excerpt">
+                            Discover the amazing benefits of lavender for skin health, relaxation, and overall wellness in your daily self-care routine.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">February 20, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card fade-in">
+                    <img src="https://images.pexels.com/photos/4465126/pexels-photo-4465126.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Zero Waste Living" class="blog-image">
+                    <div class="blog-content">
+                        <div class="blog-meta">
+                            <span class="blog-tag">Zero Waste</span>
+                            <span class="blog-tag">Lifestyle</span>
+                        </div>
+                        <h3>Zero Waste Beauty: Small Changes, Big Impact</h3>
+                        <p class="blog-excerpt">
+                            Simple swaps and mindful choices that can help you reduce waste in your beauty routine while maintaining healthy, glowing skin.
+                        </p>
+                        <div class="blog-footer">
+                            <span class="blog-date">February 15, 2024</span>
+                            <a href="#" class="blog-read-more">Read More →</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-content fade-in">
+                <h2>Stay Connected</h2>
+                <p>Subscribe to our newsletter for skincare tips, new product launches, and exclusive offers delivered to your inbox.</p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+                    <button type="submit" class="newsletter-btn">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flezen</h3>
+                    <p>Handcrafted organic soaps made with love and the finest natural ingredients. Experience the purity of nature in every bar.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#ingredients">Ingredients Guide</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey towards sustainable beauty</p>
+                    <p>Email: hello@flezen.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flezen. All rights reserved. Made with 🌿 for a better world.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Newsletter form handling
+        const newsletterForm = document.getElementById('newsletter-form');
+        
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.newsletter-btn');
+            const input = this.querySelector('.newsletter-input');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Subscribing...';
+            submitBtn.style.background = 'var(--secondary)';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                submitBtn.textContent = 'Subscribed! ✓';
+                submitBtn.style.background = 'var(--mint)';
+                
+                // Reset form
+                input.value = '';
+                
+                // Reset button after delay
+                setTimeout(() => {
+                    submitBtn.textContent = originalText;
+                    submitBtn.style.background = '';
+                }, 3000);
+            }, 1500);
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Blog card hover effects
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

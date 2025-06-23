@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - Flezen Organic Soaps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #fcfaf5;
+            --bg-white: #ffffff;
+            --text-main: #2b2b28;
+            --text-muted: #857b6f;
+            --primary: #7e5e3b;
+            --secondary: #4e6c50;
+            --accent: #e4ccb0;
+            --accent-light: #f0e6d7;
+            --mint: #8fbc8f;
+            --shadow: rgba(126, 94, 59, 0.15);
+            --shadow-soft: rgba(43, 39, 40, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        /* header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 250, 245, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px var(--shadow-soft);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '🌿';
+            font-size: 1rem;
+            position: absolute;
+            top: -5px;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: var(--primary);
+            margin: 3px 0;
+            transition: 0.3s;
+        } */
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--bg-light) 100%);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 5rem 0;
+        }
+
+        .contact-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* grid-template-columns: 1fr 1fr;
+            /* */
+            /* align-items: start; */ 
+             gap: 5rem;
+        }
+
+        .contact-info {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px var(--shadow-soft);
+        }
+
+        .contact-info h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--accent-light);
+            border-radius: 15px;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .contact-details h4 {
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: var(--text-muted);
+        }
+
+      
+        /* Map Section */
+        .map-section {
+            background: var(--accent-light);
+            padding: 5rem 0;
+        }
+
+        .map-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .map-info {
+            background: var(--bg-white);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px var(--shadow-soft);
+        }
+
+        .map-info h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .map-info p {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .map-placeholder {
+            background: var(--accent);
+            border-radius: 25px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 500;
+            box-shadow: 0 15px 35px var(--shadow-soft);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 5rem 0;
+            background: var(--bg-white);
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .faq-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .faq-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .faq-item {
+            background: var(--accent-light);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .faq-item h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .faq-item p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-main);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 0;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+             .contact-content {
+                flex-direction: column;
+             }
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .map-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .faq-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                padding: 1rem 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+
+            .contact-info,
+            .contact-form,
+            .map-info {
+                padding: 2rem;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Flezen</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html" class="active">Contact</a></li>
+            </ul>
+            <div class="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header> -->
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Get in Touch</h1>
+            <p>We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-content">
+
+                <div class="contact-info fade-in">
+                    <h2>Contact Information</h2>
+                    <div class="contact-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>hello@flezen.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>(555) 123-4567</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <h4>Address</h4>
+                            <p>123 Natural Way<br>Organic Valley, CA 94000</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">🕒</div>
+                        <div class="contact-details">
+                            <h4>Business Hours</h4>
+                            <p>Mon-Fri: 9AM-6PM<br>Sat-Sun: 10AM-4PM</p>
+                        </div>
+                    </div>
+                </div>
+
+                  <div >
+                       
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d962.8229923468441!2d76.90244336947946!3d15.14230189363031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bb713119f828801%3A0xfe291967321b9ad8!2sFlezen%20Glow!5e0!3m2!1sen!2sin!4v1750682008071!5m2!1sen!2sin" width="600" height="450" style="border:2px solid black; border-radius: 20px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                   <div class="contact-item" style="margin-top: 30px; max-width: 300px; margin-inline: auto;;" >
+                        <div class="contact-icon">📍</div>
+                        <div class="contact-details">
+                            <style>
+                               .btnn{ 
+                                background: linear-gradient(135deg, #7e5e3b 0%, #4e6c50 100%);
+            color: rgb(255, 255, 255) !important;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;} 
+
+              .btnn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(225, 142, 142, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btnn:hover::before {
+            left: 100%;
+        }
+
+        .btnn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(126, 94, 59, 0.4);
+        }
+                            </style>
+                        <a href="https://www.google.com/maps/place/Flezen+Glow/@15.1425027,76.9031976,18.5z/data=!4m6!3m5!1s0x3bb713119f828801:0xfe291967321b9ad8!8m2!3d15.1423006!4d76.9030871!16s%2Fg%2F11m6g7mspz?hl=en&entry=ttu&g_ep=EgoyMDI1MDYxNy4wIKXMDSoASAFQAw%3D%3D">   <button class="btnn">View full Map </button></a>
+                        
+                        </div>
+                    </div>
+                </div>
+           
+
+
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+ 
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header fade-in">
+                <h2>Frequently Asked Questions</h2>
+                <p>Quick answers to questions you might have about our products and services.</p>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item fade-in">
+                    <h4>Are your soaps suitable for sensitive skin?</h4>
+                    <p>Yes! All our soaps are made with gentle, natural ingredients. Our Gentle Care line is specifically formulated for sensitive skin and is fragrance-free.</p>
+                </div>
+                <div class="faq-item fade-in">
+                    <h4>How long do your soaps last?</h4>
+                    <p>Our soaps typically last 4-6 weeks with daily use. To extend their life, keep them in a dry place between uses and use a soap dish with drainage.</p>
+                </div>
+                <div class="faq-item fade-in">
+                    <h4>Do you offer custom scents?</h4>
+                    <p>We offer custom blending for orders of 10 bars or more. Contact us to discuss your preferences and we'll create a unique blend just for you.</p>
+                </div>
+                <div class="faq-item fade-in">
+                    <h4>What is your return policy?</h4>
+                    <p>We offer a 30-day satisfaction guarantee. If you're not completely happy with your purchase, contact us for a full refund or exchange.</p>
+                </div>
+                <div class="faq-item fade-in">
+                    <h4>Are your products vegan?</h4>
+                    <p>Yes, all our soaps are 100% vegan and cruelty-free. We never test on animals and use only plant-based ingredients.</p>
+                </div>
+                <div class="faq-item fade-in">
+                    <h4>How should I store the soaps?</h4>
+                    <p>Store soaps in a cool, dry place away from direct sunlight. Once opened, use within 12 months for best quality and fragrance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flezen</h3>
+                    <p>Handcrafted organic soaps made with love and the finest natural ingredients. Experience the purity of nature in every bar.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <!-- <li><a href="blog.html">Blog</a></li> -->
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- <div class="footer-section">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#ingredients">Ingredients Guide</a></li>
+                    </ul>
+                </div> -->
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey towards sustainable beauty</p>
+                    <p>Email: hello@flezen.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flezen. All rights reserved. Made with 🌿 for a better world.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Form submission handling
+        // const contactForm = document.getElementById('contact-form');
+        
+        // contactForm.addEventListener('submit', function(e) {
+        //     e.preventDefault();
+            
+        //     const submitBtn = this.querySelector('.submit-btn');
+        //     const originalText = submitBtn.textContent;
+            
+        //     // Show loading state
+        //     submitBtn.textContent = 'Sending...';
+        //     submitBtn.style.background = 'var(--secondary)';
+            
+        //     // Simulate form submission
+        //     setTimeout(() => {
+        //         submitBtn.textContent = 'Message Sent! ✓';
+        //         submitBtn.style.background = 'var(--mint)';
+                
+        //         // Reset form
+        //         contactForm.reset();
+                
+        //         // Reset button after delay
+        //         setTimeout(() => {
+        //             submitBtn.textContent = originalText;
+        //             submitBtn.style.background = '';
+        //         }, 3000);
+        //     }, 1500);
+        // });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

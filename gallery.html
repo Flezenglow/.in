@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Flezen Organic Soaps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-light: #fcfaf5;
+            --bg-white: #ffffff;
+            --text-main: #2b2b28;
+            --text-muted: #857b6f;
+            --primary: #7e5e3b;
+            --secondary: #4e6c50;
+            --accent: #e4ccb0;
+            --accent-light: #f0e6d7;
+            --mint: #8fbc8f;
+            --shadow: rgba(126, 94, 59, 0.15);
+            --shadow-soft: rgba(43, 39, 40, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+     
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--accent-light) 0%, var(--bg-light) 100%);
+            padding: 4rem 0 3rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            color: var(--text-main);
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Filters */
+        .gallery-filters {
+            background: var(--bg-white);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(126, 94, 59, 0.1);
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.8rem 1.5rem;
+            border: 2px solid var(--accent);
+            background: var(--bg-light);
+            color: var(--text-main);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+
+        /* Gallery Grid */
+        .gallery-section {
+            padding: 4rem 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: var(--bg-white);
+            box-shadow: 0 10px 25px var(--shadow-soft);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--shadow);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(126, 94, 59, 0.8) 0%, rgba(78, 108, 80, 0.8) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .gallery-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Masonry Layout for larger items */
+        .gallery-item.large {
+            grid-row: span 2;
+        }
+
+        .gallery-item.large img {
+            height: 620px;
+        }
+
+        .gallery-item.wide {
+            grid-column: span 2;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            position: relative;
+            margin: 5% auto;
+            max-width: 90%;
+            max-height: 90%;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        .modal-content img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-main);
+            color: white;
+            padding: 4rem 0 2rem;
+            margin-top: 4rem;
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 50%, var(--accent) 100%);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            line-height: 1.8;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .gallery-item.wide {
+                grid-column: span 1;
+            }
+
+            .gallery-item.large {
+                grid-row: span 1;
+            }
+
+            .gallery-item.large img {
+                height: 300px;
+            }
+
+            nav {
+                padding: 1rem 15px;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Our Gallery</h1>
+            <p>Explore the beauty of natural skincare through our carefully curated collection of lifestyle and product photography.</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filters -->
+    <section class="gallery-filters">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Images</button>
+                <button class="filter-btn" data-filter="products">Products</button>
+                <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+                <button class="filter-btn" data-filter="ingredients">Ingredients</button>
+                <button class="filter-btn" data-filter="process">Process</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-section">
+        <div class="container">
+            <div class="gallery-grid" id="gallery-grid">
+                <div class="gallery-item fade-in large" data-category="products">
+                    <img src="https://images.pexels.com/photos/4465124/pexels-photo-4465124.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Handcrafted Soap Collection">
+                    <div class="gallery-overlay">
+                        <h3>Artisan Collection</h3>
+                        <p>Our signature handcrafted soap collection featuring natural ingredients</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="lifestyle">
+                    <img src="imgs/clr.jpg" alt="Spa Ritual">
+                    <div class="gallery-overlay">
+                        <h3>Daily Ritual</h3>
+                        <p>Transform your daily routine into a mindful spa experience</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="ingredients">
+                    <img src="https://images.pexels.com/photos/4465831/pexels-photo-4465831.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Natural Ingredients">
+                    <div class="gallery-overlay">
+                        <h3>Pure Ingredients</h3>
+                        <p>Carefully selected organic botanicals and essential oils</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in wide" data-category="process">
+                    <img src="https://images.pexels.com/photos/7262997/pexels-photo-7262997.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Soap Making Process">
+                    <div class="gallery-overlay">
+                        <h3>Handcrafted Process</h3>
+                        <p>Each bar is carefully made by skilled artisans using traditional methods</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="products">
+                    <img src="https://images.pexels.com/photos/6663669/pexels-photo-6663669.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lavender Soap">
+                    <div class="gallery-overlay">
+                        <h3>Lavender Dreams</h3>
+                        <p>Soothing lavender soap for relaxation and peaceful sleep</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="lifestyle">
+                    <img src="https://images.pexels.com/photos/8030795/pexels-photo-8030795.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Natural Skincare">
+                    <div class="gallery-overlay">
+                        <h3>Gentle Care</h3>
+                        <p>Nurturing your skin with nature's gentle touch</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="ingredients">
+                    <img src="https://images.pexels.com/photos/6663682/pexels-photo-6663682.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Herbal Ingredients">
+                    <div class="gallery-overlay">
+                        <h3>Herbal Blend</h3>
+                        <p>A harmonious blend of healing herbs and botanicals</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in large" data-category="lifestyle">
+                    <img src="https://images.pexels.com/photos/8030892/pexels-photo-8030892.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Refreshing Bath">
+                    <div class="gallery-overlay">
+                        <h3>Refreshing Ritual</h3>
+                        <p>Start your day with an energizing and refreshing cleanse</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="products">
+                    <img src="https://images.pexels.com/photos/7262986/pexels-photo-7262986.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Rose Garden Soap">
+                    <div class="gallery-overlay">
+                        <h3>Rose Garden</h3>
+                        <p>Luxurious rose-infused soap for mature and delicate skin</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="process">
+                    <img src="imgs/hon.jpg" alt="Artisan Workshop">
+                    <div class="gallery-overlay">
+                        <h3>Our Workshop</h3>
+                        <p>Where creativity meets craftsmanship in every handmade bar</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in wide" data-category="lifestyle">
+                    <img src="https://images.pexels.com/photos/4465126/pexels-photo-4465126.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sustainable Living">
+                    <div class="gallery-overlay">
+                        <h3>Sustainable Beauty</h3>
+                        <p>Eco-friendly practices for a beautiful planet and beautiful skin</p>
+                    </div>
+                </div>
+
+                <div class="gallery-item fade-in" data-category="ingredients">
+                    <img src="https://images.pexels.com/photos/5938358/pexels-photo-5938358.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Essential Oils">
+                    <div class="gallery-overlay">
+                        <h3>Essential Oils</h3>
+                        <p>Pure, therapeutic-grade oils for aromatherapy benefits</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <img id="modalImage" src="" alt="">
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Flezen</h3>
+                    <p>Handcrafted organic soaps made with love and the finest natural ingredients. Experience the purity of nature in every bar.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <!-- <div class="footer-section">
+                    <h3>Customer Care</h3>
+                    <ul>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#ingredients">Ingredients Guide</a></li>
+                    </ul>
+                </div> -->
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <p>Follow our journey towards sustainable beauty</p>
+                    <p>Email: hello@flezen.com</p>
+                    <p>Phone: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Flezen. All rights reserved. Made with 🌿 for a better world.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Gallery filtering functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+
+                const filterValue = button.getAttribute('data-filter');
+
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        item.style.animation = 'fadeIn 0.5s ease';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const modalClose = document.querySelector('.modal-close');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const img = item.querySelector('img');
+                modalImage.src = img.src;
+                modalImage.alt = img.alt;
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Escape key to close modal
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.style.display === 'block') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Scroll animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Add fadeIn keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
