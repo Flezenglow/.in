@@ -60,7 +60,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 2rem;
+            padding: 0.1rem 2rem;
         }
 
         .logo {
@@ -196,7 +196,7 @@
 
         .hero-text h1 {
             font-family: 'Playfair Display', serif;
-            font-size: 5.5rem;
+            font-size: 4.5rem;
             font-weight: 700;
             line-height: 1.1;
             color: var(--text-main);
